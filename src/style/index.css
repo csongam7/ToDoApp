@@ -3,34 +3,35 @@ body {
     background-color: #000000;
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr 7fr;
-    grid-template-rows: 20vh auto;
+    grid-template-columns: 1fr 10fr;
+    /*grid-template-rows: clamp(100px, 10vh, 300px) auto;*/
     width: 100vw;
     height: 100vh;
   }
 
 .sideContainer{
-  width: 15vw;
-  background-color: gold;
+  width: 100%;
+  background-color: rgb(133, 114, 7);
   height: 100vh;
   grid-column: 1;
-  grid-row-start:1;
-  grid-row-end: 2;
+  /*grid-row-start:1;
+  grid-row-end: 2;*/
 }
  
 .toDoContainer{
-  background-color: rgb(1, 246, 10);
+  background-color: rgb(1, 218, 8);
   width: 100%;
   height: 100%;
   grid-column: 2;
-  grid-row: 2;
-  position: relative;
+  grid-row: 1;
+  /*grid-row: 2;*/
 }
 
-.header{
+/*.header{
   height: 100%;
   width: 100%;
-  background-color: red;
+  background-color: rgb(132, 6, 6);
   grid-row: 1;
   grid-column: 2;
 }
+*/
