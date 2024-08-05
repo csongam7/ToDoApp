@@ -1,3 +1,13 @@
+import './style/index.css'
+
 const sideContainer = document.createElement('div');
 const toDoContainer = document.createElement('div');
-document.body.appendChild(sideContainer)
+const header = document.createElement('div');
+
+sideContainer.className = 'sideContainer';
+toDoContainer.className = 'toDoContainer';
+header.className = 'header';
+
+document.body.appendChild(sideContainer);
+document.body.appendChild(header);
+document.body.appendChild(toDoContainer);

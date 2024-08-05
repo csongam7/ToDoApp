@@ -2,6 +2,19 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/, // Regular expression to match CSS files
+        use: ['style-loader', 'css-loader'], // Loaders to process CSS
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i, // Example for handling images
+        type: 'asset/resource',
+      },
+      // Add other rules as needed
+    ],
+  },
   entry: {
      app: './src/index.js',
   },
