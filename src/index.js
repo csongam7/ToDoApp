@@ -1,4 +1,5 @@
 import './style/index.css'
+import { addProjectFeature } from './addProjectFeature';
 
 const sideContainer = document.createElement('div');
 const toDoContainer = document.createElement('div');
@@ -16,3 +17,5 @@ const addProjectBtn = document.createElement('button');
 addProjectBtn.className = 'sideContainerBtn';
 sideContainer.appendChild(addProjectBtn);
 addProjectBtn.innerHTML = 'Add project'
+addProjectBtn.id = 'addProject'
+addProjectBtn.addEventListener('click', addProjectFeature())

@@ -27,6 +27,13 @@ body {
   /*grid-row: 2;*/
 }
 
+.inputContainer{
+  display: grid;
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+}
+
 /*.header{
   height: 100%;
   width: 100%;
