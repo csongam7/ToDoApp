@@ -1,9 +1,23 @@
-export function addProjectFeature(){
+import { Project } from "./projectManager"
+import { displayAllProjects } from ".";
+export function createProjectForm(){
 
         //project form
         const projectForm = document.createElement('form');
-        projectForm.action = '/addProject';
-        projectForm.method = 'POST';
+        projectForm.id = 'projectForm'
+        projectForm.addEventListener('submit', event => {
+            const form = document.getElementById('projectForm');
+            const formData = new FormData(form);
+        // Convert the form data to an object
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+        //save the new project    
+            const project = new Project(data.projectName, data.projectDescription);
+            project.saveProject();
+            displayAllProjects();
+        })
 
         //project name input
         const projectNameInput = document.createElement('input');
