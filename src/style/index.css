@@ -34,6 +34,13 @@ body {
   justify-self: center;
 }
 
+.projectsOnTheSideContainer{
+  width: 100%;
+  background-color: rgb(0, 255, 200);
+  height: 100%;
+  grid-column: 1;
+}
+
 /*.header{
   height: 100%;
   width: 100%;
