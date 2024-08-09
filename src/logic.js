@@ -1,6 +1,5 @@
-import { displayProjectOnTheSide } from "./DOMmanipulator";
+import { displayProjectOnTheSide, deleteProjectFromDOM } from "./DOMmanipulator";
 import { Project } from "./projectManager";
-import { deleteProjectFromDOM } from "./DOMmanipulator";
 
 export function displayAllProjects(){
     Object.keys(localStorage).forEach(function (key) {
@@ -29,4 +28,8 @@ export function deleteProject(name){
             deleteProjectFromDOM(key);
         };
     })
+}
+
+export function openProject(project){
+    localStorage.getItem(project);
 }

@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, displayAllProjects } from "./logic";
+import { createNewProject, deleteProject, openProject } from "./logic";
 
 export function buildTheSideContainer(){
     const sideContainer = document.createElement('div');
@@ -72,7 +72,12 @@ export function projectFormBuilder(){
 
 export function displayProjectOnTheSide(projectName){
     const sideProject = document.createElement('div');
-    sideProject.innerHTML = projectName.replace('project', '');
+    const sideProjectName = document.createElement('div');
+    sideProjectName.innerHTML = projectName.replace('project', '');
+    sideProjectName.addEventListener('click', function(){
+        openProject(projectName);
+    })
+    sideProject.appendChild(sideProjectName);
     sideProject.className = 'sideProject';
     sideProject.id = projectName;
     const projectDeleteButton = document.createElement('button');
@@ -90,6 +95,5 @@ export function deleteProjectFromDOM(name){
     document.querySelector(`#${name}`).remove();
 }
 
-function displayProjectOnMainContainer(){
-
+function displayOpenedProject(){
 }
