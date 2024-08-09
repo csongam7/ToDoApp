@@ -35,8 +35,6 @@ export function projectFormBuilder(){
     const projectNameInput = document.createElement('input');
     projectNameInput.type = 'text';
     projectNameInput.id = 'projectName';
-    
-    //projectNameInput.pattern = "^[^\d].*"
     projectNameInput.name = 'projectName';
     projectNameInput.placeholder = 'Project Name';
 
@@ -96,7 +94,36 @@ export function deleteProjectFromDOM(name){
 }
 
 export function displayOpenedProject(project){
+    const projectContainer = document.querySelector('.projectContainer');
+    //prooject's name
     const projectName = document.createElement('div');
     projectName.innerHTML = project.name;
-    document.querySelector('.projectContainer').appendChild(projectName);
+    projectContainer.appendChild(projectName);
+    projectName.className = 'projectName';
+    //project's description
+    const projectDescription = document.createElement('div');
+    projectDescription.innerHTML = project.description;
+    projectContainer.appendChild(projectDescription);
+    projectDescription.className = 'projectDescription';
+    //tasks container
+    const tasksContainer = document.createElement('div');
+    tasksContainer.className = 'tasksContainer';
+    projectContainer.appendChild(tasksContainer);
+    //done tasks
+    const doneTasksContainer = document.createElement('div');
+    doneTasksContainer.className = 'doneTasks';
+    projectContainer.appendChild(doneTasksContainer);
+    //tasks
+    
+    for (let task of project.tasks){
+        const taskElement = document.createElement('div');
+        taskElement.className = 'task';
+        taskElement.innerHTML = task;
+        if(task.isDone){
+            doneTasksContainer.appendChild(taskElement);
+        }
+        else{
+            tasksContainer.appendChild(taskElement);
+        }
+    }
 }

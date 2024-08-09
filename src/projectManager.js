@@ -2,7 +2,7 @@ export class Project{
     constructor(name, description){
         this.name = name;
         this.description = description;
-        this.tasks = [];
+        this.tasks = ["beszarni", "kiszarni"];
         this.dueDate = '';
     }
 
@@ -13,4 +13,5 @@ export class Project{
     deleteProject(){
         localStorage.removeItem(this.name + 'project')
     }
+
 }
