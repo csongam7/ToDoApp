@@ -30,7 +30,12 @@ export function deleteProject(name){
     })
 }
 
+function clearProjectDisplay(){
+    document.querySelector('.projectContainer').innerHTML = '';
+}
+
 export function openProject(key){
+    clearProjectDisplay();
     const project = JSON.parse(localStorage.getItem(key));
     displayOpenedProject(project);
 }
