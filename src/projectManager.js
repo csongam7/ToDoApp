@@ -7,7 +7,7 @@ export class Project{
     }
 
     saveProject(){
-        localStorage.setItem(this.name + 'project', this);
+        localStorage.setItem(this.name + 'project', JSON.stringify(this));
     }
 
     deleteProject(){

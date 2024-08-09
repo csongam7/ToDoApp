@@ -1,4 +1,4 @@
-import { displayProjectOnTheSide, deleteProjectFromDOM } from "./DOMmanipulator";
+import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject } from "./DOMmanipulator";
 import { Project } from "./projectManager";
 
 export function displayAllProjects(){
@@ -30,6 +30,7 @@ export function deleteProject(name){
     })
 }
 
-export function openProject(project){
-    localStorage.getItem(project);
+export function openProject(key){
+    const project = JSON.parse(localStorage.getItem(key));
+    displayOpenedProject(project);
 }

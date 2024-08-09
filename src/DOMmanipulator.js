@@ -21,9 +21,9 @@ export function buildTheSideContainer(){
 }
 
 export function buildTheProjectContainer(){
-    const toDoContainer = document.createElement('div');
-    toDoContainer.className = 'toDoContainer';
-    document.body.appendChild(toDoContainer);
+    const projectContainer = document.createElement('div');
+    projectContainer.className = 'projectContainer';
+    document.body.appendChild(projectContainer);
 }
 
 export function projectFormBuilder(){
@@ -95,5 +95,8 @@ export function deleteProjectFromDOM(name){
     document.querySelector(`#${name}`).remove();
 }
 
-function displayOpenedProject(){
+export function displayOpenedProject(project){
+    const projectName = document.createElement('div');
+    projectName.innerHTML = project.name;
+    document.querySelector('.projectContainer').appendChild(projectName);
 }
