@@ -1,4 +1,4 @@
-export function addTask(){
+export function createTaskForm(){
     
     //task form
     const taskForm = document.createElement('form');

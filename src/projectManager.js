@@ -7,15 +7,10 @@ export class Project{
     }
 
     saveProject(){
-        localStorage.setItem(this.name, this);
+        localStorage.setItem(this.name + 'project', this);
     }
 
     deleteProject(){
-        Object.keys(localStorage).forEach(function (key) {
-            if(key.match(this.key)){
-                localStorage.removeItem(key);
-                displayAllProjects;
-            }
-        })
+        localStorage.removeItem(this.name + 'project')
     }
 }
