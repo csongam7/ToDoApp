@@ -1,5 +1,6 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject } from "./logic";
+import { createNewProject, deleteProject, openProject, createNewTask } from "./logic";
+import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
     const sideContainer = document.createElement('div');
@@ -114,7 +115,6 @@ export function displayOpenedProject(project){
     doneTasksContainer.className = 'doneTasks';
     projectContainer.appendChild(doneTasksContainer);
     //tasks
-    
     for (let task of project.tasks){
         const taskElement = document.createElement('div');
         taskElement.className = 'task';
@@ -125,5 +125,45 @@ export function displayOpenedProject(project){
         else{
             tasksContainer.appendChild(taskElement);
         }
+    }
+    //add task button
+    const addTaskButton = document.createElement('button');
+    addTaskButton.className = 'addTaskButton';
+    addTaskButton.addEventListener('click', createTaskForm)
+    addTaskButton.innerHTML = '+';
+    projectContainer.appendChild(addTaskButton);
+
+    function createTaskForm(){
+
+        //task form
+        const taskForm = document.createElement('form');
+
+        //task name input field
+        const taskName = document.createElement('input');
+        taskName.type = 'text';
+        taskName.id = 'taskName'
+        taskName.name = 'taskName';
+        taskName.placeholder = 'Task name';
+        taskForm.appendChild(taskName)
+        
+        projectContainer.appendChild(taskForm);
+        
+        //priority input field
+        const taskPriorityText = document.createElement('p');
+        taskPriorityText.innerHTML = 'Select the priority of the task';
+        const taskPriority = document.createElement('input');
+        taskPriority.type = 'range';
+        taskPriority.id = 'taskPriority';
+        taskPriority.min = '0';
+        taskPriority.max = '2';
+        taskForm.appendChild(taskPriority);
+        taskForm.addEventListener('submit', function(){
+            createNewTask()
+        })
+
+        //due date input field
+        const dueDate = document.createElement('input');
+        dueDate.type = "date";
+        taskForm.appendChild(dueDate);
     }
 }

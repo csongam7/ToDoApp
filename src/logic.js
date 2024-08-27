@@ -39,3 +39,18 @@ export function openProject(key){
     const project = JSON.parse(localStorage.getItem(key));
     displayOpenedProject(project);
 }
+
+export function createNewTask(project){
+    const form = document.getElementById('taskForm');
+    const formData = new FormData(form);
+// Convert the form data to an object
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+//save the new task    
+    const task = new Task(data.taskName, data.taskPriority);
+    project.addTask();
+    displayNewTaskForm();
+    
+}

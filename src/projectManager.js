@@ -14,4 +14,11 @@ export class Project{
         localStorage.removeItem(this.name + 'project')
     }
 
+    addTask(task){
+        this.tasks.push(task)
+    }
+
+    removeTask(task){
+        this.tasks.splice(this.tasks.indexOf(task), 1);
+    }
 }

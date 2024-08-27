@@ -41,6 +41,11 @@ body {
   grid-column: 1;
 }
 
+.addTaskButton{
+  width: 30px;
+  height: 30px;
+}
+
 /*.header{
   height: 100%;
   width: 100%;

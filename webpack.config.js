@@ -5,6 +5,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader', // Use Babel loader to transpile modern JS code
+          options: {
+            presets: ['@babel/preset-env'], // Preset for compiling ES6+ syntax
+          },
+        },
+      },
+      {
         test: /\.css$/, // Regular expression to match CSS files
         use: ['style-loader', 'css-loader'], // Loaders to process CSS
       },
@@ -34,6 +44,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  resolve: {
+    extensions: ['.js'], // Resolve JavaScript files without specifying the extension
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'), // Directory to serve static files from
@@ -43,4 +56,5 @@ module.exports = {
     open: true, // Automatically open the browser
     hot: true, // Enable Hot Module Replacement
   },
+  
 };
