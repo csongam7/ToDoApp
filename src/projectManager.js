@@ -2,7 +2,7 @@ export class Project{
     constructor(name, description){
         this.name = name;
         this.description = description;
-        this.tasks = ["beszarni", "kiszarni"];
+        this.tasks = [{name: "beszarni", priority: "urgent", dueDate: "2024-10-05"},];
         this.dueDate = '';
     }
 
