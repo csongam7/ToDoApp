@@ -188,3 +188,7 @@ export function displayOpenedProject(project){
         )
     }
 }
+
+export function clearProjectDisplay(){
+    document.querySelector('.projectContainer').innerHTML = '';
+}

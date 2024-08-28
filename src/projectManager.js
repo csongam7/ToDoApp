@@ -1,4 +1,4 @@
-import { displayOpenedProject } from "./DOMmanipulator";
+import { displayOpenedProject, clearProjectDisplay } from "./DOMmanipulator";
 export class Project{
     constructor(name, description){
         this.name = name;
@@ -18,6 +18,7 @@ export class Project{
     addTask(task){
         this.tasks.push(task)
         this.saveProject(this);
+        clearProjectDisplay();
         displayOpenedProject(this);
     }
 
