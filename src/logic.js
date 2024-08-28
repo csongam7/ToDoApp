@@ -1,4 +1,4 @@
-import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject } from "./DOMmanipulator";
+import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay } from "./DOMmanipulator";
 import { Project } from "./projectManager";
 import { Task } from "./taskManager";
 
@@ -10,13 +10,7 @@ export function displayAllProjects(){
 }
 
 export function createNewProject(){
-    const form = document.getElementById('projectForm');
-    const formData = new FormData(form);
-// Convert the form data to an object
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
+    const data = convertFromDataToAnObject('projectForm');
 //save the new project    
     const project = new Project(data.projectName, data.projectDescription);
     project.saveProject();
@@ -31,26 +25,30 @@ export function deleteProject(name){
     })
 }
 
-function clearProjectDisplay(){
-    document.querySelector('.projectContainer').innerHTML = '';
-}
-
 export function openProject(key){
     clearProjectDisplay();
     const project = JSON.parse(localStorage.getItem(key));
     displayOpenedProject(project);
 }
 
-export function createNewTask(project){
-    const retrievedProject = JSON.parse(localStorage.getItem(project.name + 'project'));
-    Object.setPrototypeOf(retrievedProject, Project.prototype)
-    const form = document.getElementById('taskForm');
+export function toggleIsDone(project){
+    project.task.isDone == false ? project.task.isDone = true : project.task.isDone = false;
+}
+
+function convertFromDataToAnObject(formId){
+    const form = document.getElementById(formId);
     const formData = new FormData(form);
 // Convert the form data to an object
     const data = {};
     formData.forEach((value, key) => {
         data[key] = value;
     });
+    return data;
+}
+
+export function createNewTask(project){
+    const retrievedProject = JSON.parse(localStorage.getItem(project.name + 'project'));
+    const data = convertFromDataToAnObject('taskForm')
 //save the new task    
     const task = new Task(data.taskName, data.taskPriority, data.taskDueDate);
     retrievedProject.addTask(task);

@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject, createNewTask } from "./logic";
+import { createNewProject, deleteProject, openProject, createNewTask, toggleIsDone } from "./logic";
 import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
@@ -135,6 +135,13 @@ export function displayOpenedProject(project){
         dueDate.className = 'dueDate';
         dueDate.innerHTML = task.dueDate;
         taskContainer.appendChild(dueDate);
+        //isDone
+        const ticker = document.createElement('div');
+        ticker.className = 'ticker';
+        ticker.innerHTML = "N";
+        ticker.addEventListener('click', function(){ticker.innerHTML == 'N' ? ticker.innerHTML = 'I' : ticker.innerHTML = 'N'});
+        ticker.addEventListener('click', function(){toggleIsDone(project, task)})
+        taskContainer.appendChild(ticker);
         if(task.isDone){
             doneTasksContainer.appendChild(taskContainer);
         }

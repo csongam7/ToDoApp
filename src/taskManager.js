@@ -3,6 +3,7 @@ export class Task{
         this.name = name;
         this.priority = priority;
         this.dueDate = dueDate;
+        this.isDone = false;
     }
 
     deleteTask(){}
