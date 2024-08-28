@@ -13,6 +13,7 @@ export class Project{
 
     deleteProject(){
         localStorage.removeItem(this.name + 'project')
+        clearProjectDisplay();
     }
 
     addTask(task){
