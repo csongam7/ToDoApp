@@ -1,5 +1,6 @@
 import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject } from "./DOMmanipulator";
 import { Project } from "./projectManager";
+import { Task } from "./taskManager";
 
 export function displayAllProjects(){
     Object.keys(localStorage).forEach(function (key) {
@@ -41,6 +42,8 @@ export function openProject(key){
 }
 
 export function createNewTask(project){
+    const retrievedProject = JSON.parse(localStorage.getItem(project.name + 'project'));
+    Object.setPrototypeOf(retrievedProject, Project.prototype)
     const form = document.getElementById('taskForm');
     const formData = new FormData(form);
 // Convert the form data to an object
@@ -49,8 +52,6 @@ export function createNewTask(project){
         data[key] = value;
     });
 //save the new task    
-    const task = new Task(data.taskName, data.taskPriority);
-    project.addTask();
-    displayNewTaskForm();
-    
+    const task = new Task(data.taskName, data.taskPriority, data.taskDueDate);
+    retrievedProject.addTask(task);
 }

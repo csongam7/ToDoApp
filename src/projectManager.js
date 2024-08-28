@@ -1,8 +1,9 @@
+import { displayOpenedProject } from "./DOMmanipulator";
 export class Project{
     constructor(name, description){
         this.name = name;
         this.description = description;
-        this.tasks = [{name: "beszarni", priority: "urgent", dueDate: "2024-10-05"},];
+        this.tasks = [/*{name: "beszarni", priority: "urgent", dueDate: "2024-10-05"},*/];
         this.dueDate = '';
     }
 
@@ -16,6 +17,8 @@ export class Project{
 
     addTask(task){
         this.tasks.push(task)
+        this.saveProject(this);
+        displayOpenedProject(this);
     }
 
     removeTask(task){

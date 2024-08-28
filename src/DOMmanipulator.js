@@ -145,14 +145,15 @@ export function displayOpenedProject(project){
     //add task button
     const addTaskButton = document.createElement('button');
     addTaskButton.className = 'addTaskButton';
-    addTaskButton.addEventListener('click', createTaskForm)
+    addTaskButton.addEventListener('click', function(){createTaskForm(project)})
     addTaskButton.innerHTML = '+';
     projectContainer.appendChild(addTaskButton);
 
-    function createTaskForm(){
+    function createTaskForm(project){
 
         //task form
         const taskForm = document.createElement('form');
+        taskForm.id = 'taskForm';
 
         //task name input field
         const taskName = document.createElement('input');
@@ -165,22 +166,25 @@ export function displayOpenedProject(project){
         projectContainer.appendChild(taskForm);
         
         //priority input field
-        const taskPriorityText = document.createElement('p');
-        taskPriorityText.innerHTML = 'Select the priority of the task';
-        const taskPriority = document.createElement('input');
-        taskPriority.type = 'range';
-        taskPriority.id = 'taskPriority';
-        taskPriority.min = '0';
-        taskPriority.max = '2';
-        taskForm.appendChild(taskPriority);
+        const taskPriorityInput = document.createElement('input');
+        taskPriorityInput.type = 'text';
+        taskPriorityInput.name = 'taskPriority';
+        taskPriorityInput.id = 'taskPriority';
+        taskPriorityInput.value = 'urgent';
+        taskForm.appendChild(taskPriorityInput);
 
         //due date input field
         const dueDate = document.createElement('input');
         dueDate.type = "date";
+        dueDate.name = 'taskDueDate';
+        dueDate.id = 'taskDueDate';
         taskForm.appendChild(dueDate);
 
-        taskForm.addEventListener('submit', function(){
-            createNewTask()
-        })
+        const submitButton = document.createElement('input');
+        submitButton.type = 'submit';
+        taskForm.appendChild(submitButton);
+
+        taskForm.addEventListener('submit', function(){createNewTask(project)}
+        )
     }
 }
