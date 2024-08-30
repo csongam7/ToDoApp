@@ -31,8 +31,9 @@ export function openProject(key){
     displayOpenedProject(project);
 }
 
-export function toggleIsDone(project){
-    project.task.isDone == false ? project.task.isDone = true : project.task.isDone = false;
+export function toggleIsDone(project, taskToChangeIsDoneOn){
+    taskToChangeIsDoneOn.isDone ? taskToChangeIsDoneOn.isDone = false : taskToChangeIsDoneOn.isDone = true;
+    project.addTask(taskToChangeIsDoneOn)
 }
 
 function convertFromDataToAnObject(formId){
@@ -48,6 +49,7 @@ function convertFromDataToAnObject(formId){
 
 export function createNewTask(project){
     const retrievedProject = JSON.parse(localStorage.getItem(project.name + 'project'));
+    Object.setPrototypeOf(retrievedProject, Project.prototype);
     const data = convertFromDataToAnObject('taskForm')
 //save the new task    
     const task = new Task(data.taskName, data.taskPriority, data.taskDueDate);

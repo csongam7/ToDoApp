@@ -95,6 +95,7 @@ export function deleteProjectFromDOM(name){
 }
 
 export function displayOpenedProject(project){
+    Object.setPrototypeOf(project, Project.prototype);
     const projectContainer = document.querySelector('.projectContainer');
     //project's name
     const projectName = document.createElement('div');
@@ -138,9 +139,12 @@ export function displayOpenedProject(project){
         //isDone
         const ticker = document.createElement('div');
         ticker.className = 'ticker';
-        ticker.innerHTML = "N";
+        if(task.isDone == true){
+            ticker.innerHTML = 'I'
+        }
+        else{ticker.innerHTML = "N";}
         ticker.addEventListener('click', function(){ticker.innerHTML == 'N' ? ticker.innerHTML = 'I' : ticker.innerHTML = 'N'});
-        ticker.addEventListener('click', function(){toggleIsDone(project, task)})
+        ticker.addEventListener('click', function(){console.log(localStorage),localStorage.getItem(project.name), console.log(project.name)})
         taskContainer.appendChild(ticker);
         if(task.isDone){
             doneTasksContainer.appendChild(taskContainer);

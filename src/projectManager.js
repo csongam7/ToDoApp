@@ -23,6 +23,13 @@ export class Project{
         displayOpenedProject(this);
     }
 
+    changeTaskIsDone(taskToChangeIsDoneOn){
+        this.tasks.forEach(task => {if(task.name == taskToChangeIsDoneOn.name){
+            task.isDone == false ? task.isDone = true : task.isDone = false;
+        }});
+        this.saveProject();
+    }
+
     removeTask(task){
         this.tasks.splice(this.tasks.indexOf(task), 1);
     }
