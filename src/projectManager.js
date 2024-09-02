@@ -1,4 +1,5 @@
 import { displayOpenedProject, clearProjectDisplay } from "./DOMmanipulator";
+import { getAllTheProjectsFromLocalstorage, convertJSObjectToJSON, updateProject} from "./logic";
 export class Project{
     constructor(name, description){
         this.name = name;
@@ -8,7 +9,9 @@ export class Project{
     }
 
     saveProject(){
-        localStorage.setItem(this.name + 'project', JSON.stringify(this));
+        const allProjects = getAllTheProjectsFromLocalstorage();
+        allProjects.push(this);
+        localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
     }
 
     deleteProject(){
@@ -17,17 +20,10 @@ export class Project{
     }
 
     addTask(task){
-        this.tasks.push(task)
-        this.saveProject(this);
+        this.tasks.push(task);
+        updateProject(this);
         clearProjectDisplay();
         displayOpenedProject(this);
-    }
-
-    changeTaskIsDone(taskToChangeIsDoneOn){
-        this.tasks.forEach(task => {if(task.name == taskToChangeIsDoneOn.name){
-            task.isDone == false ? task.isDone = true : task.isDone = false;
-        }});
-        this.saveProject();
     }
 
     removeTask(task){

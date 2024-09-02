@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject, createNewTask, toggleIsDone } from "./logic";
+import { createNewProject, deleteProject, openProject, createNewTask, changeIsDoneOnTask } from "./logic";
 import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
@@ -144,7 +144,7 @@ export function displayOpenedProject(project){
         }
         else{ticker.innerHTML = "N";}
         ticker.addEventListener('click', function(){ticker.innerHTML == 'N' ? ticker.innerHTML = 'I' : ticker.innerHTML = 'N'});
-        ticker.addEventListener('click', function(){console.log(localStorage),localStorage.getItem(project.name), console.log(project.name)})
+        ticker.addEventListener('click', function(){changeIsDoneOnTask(project, task)})
         taskContainer.appendChild(ticker);
         if(task.isDone){
             doneTasksContainer.appendChild(taskContainer);
