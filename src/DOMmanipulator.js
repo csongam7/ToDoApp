@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject, createNewTask, changeIsDoneOnTask } from "./logic";
+import { createNewProject, deleteProject, openProject, editProject, createNewTask, changeIsDoneOnTask } from "./logic";
 import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
@@ -27,7 +27,7 @@ export function buildTheProjectContainer(){
     document.body.appendChild(projectContainer);
 }
 
-export function projectFormBuilder(){
+export function projectFormBuilder(project=''){
     const projectForm = document.createElement('form');
     projectForm.id = 'projectForm';
     projectForm.addEventListener('submit', createNewProject)
@@ -37,14 +37,24 @@ export function projectFormBuilder(){
     projectNameInput.type = 'text';
     projectNameInput.id = 'projectName';
     projectNameInput.name = 'projectName';
-    projectNameInput.placeholder = 'Project Name';
+    if(!project){
+        projectNameInput.placeholder = 'Project Name';
+    }
+    else{
+        projectNameInput.value = project.name;
+    }
 
     //project description input
     const projectDescriptionInput = document.createElement('input');
     projectDescriptionInput.type = 'text';
     projectDescriptionInput.id = 'projectDescription';
     projectDescriptionInput.name = 'projectDescription';
-    projectDescriptionInput.placeholder = 'Project Description (optional)';
+    if(!project.description){
+        projectDescriptionInput.placeholder = 'Project Description (optional)';
+    }
+    else{
+        projectDescriptionInput.value = project.description;
+    }
 
     //submit button
     const submitButton = document.createElement('button');
@@ -102,6 +112,12 @@ export function displayOpenedProject(project){
     projectName.innerHTML = project.name;
     projectContainer.appendChild(projectName);
     projectName.className = 'projectName';
+    const projectEditButton = document.createElement('button');
+    projectEditButton.className = 'editButton';
+    projectEditButton.id = 'projectEditButton';
+    projectEditButton.innerHTML = 'Edit';
+    projectEditButton.addEventListener('click', function(){editProject(project)});
+    projectContainer.appendChild(projectEditButton);
     //project's description
     const projectDescription = document.createElement('div');
     projectDescription.innerHTML = project.description;

@@ -1,5 +1,5 @@
 import { tr } from "date-fns/locale";
-import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay } from "./DOMmanipulator";
+import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay, projectFormBuilder } from "./DOMmanipulator";
 import { Project } from "./projectManager";
 import { Task } from "./taskManager";
 
@@ -77,17 +77,16 @@ export function  updateProject(project){
     localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
 }
 
+export function editProject(project){
+    projectFormBuilder(project)
+}
+
 export function getTheIndexOfTheTaskWeWantToWorkWith(project, task){
     let index = '';
     project.tasks.forEach(currentTaskOnTheLoop => {if(currentTaskOnTheLoop.name == task.name){
         index = project.tasks.indexOf(currentTaskOnTheLoop)
     }})
     return index;
-}
-
-export function saveUpdatedProjectListToLocalStorage(updatedProjects){
-    const updatedProjectsInJSON = JSON.parse(updatedProjects);
-    localStorage.setItem('projects', updatedProjectsInJSON);
 }
 
 export function getAllTheProjectsFromLocalstorage(){
