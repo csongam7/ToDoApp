@@ -29,4 +29,12 @@ export class Project{
     removeTask(task){
         this.tasks.splice(this.tasks.indexOf(task), 1);
     }
+
+    editName(name){
+        this.name = name;
+    }
+
+    editDescription(description){
+        this.description = description;
+    }
 }

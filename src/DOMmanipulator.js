@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject, editProject, createNewTask, changeIsDoneOnTask } from "./logic";
+import { createNewProject, deleteProject, openProject, editProjectNameAndDescription, callTheProjectFormBuilderToEditProject, createNewTask, changeIsDoneOnTask, updateProject } from "./logic";
 import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
@@ -30,7 +30,9 @@ export function buildTheProjectContainer(){
 export function projectFormBuilder(project=''){
     const projectForm = document.createElement('form');
     projectForm.id = 'projectForm';
-    projectForm.addEventListener('submit', createNewProject)
+    
+    if(!project){projectForm.addEventListener('submit', createNewProject)}
+    else{projectForm.addEventListener('submit', function(){editProjectNameAndDescription(project)})}
         
     //project name input
     const projectNameInput = document.createElement('input');
@@ -116,7 +118,7 @@ export function displayOpenedProject(project){
     projectEditButton.className = 'editButton';
     projectEditButton.id = 'projectEditButton';
     projectEditButton.innerHTML = 'Edit';
-    projectEditButton.addEventListener('click', function(){editProject(project)});
+    projectEditButton.addEventListener('click', function(){callTheProjectFormBuilderToEditProject(project)});
     projectContainer.appendChild(projectEditButton);
     //project's description
     const projectDescription = document.createElement('div');

@@ -70,15 +70,16 @@ export function changeIsDoneOnTask(project, task){
     updateProject(selectedProject);
 }
 
-export function  updateProject(project){
+export function  updateProject(project, oldProject=none){
     const allProjects = getAllTheProjectsFromLocalstorage();
-    const indexOF = getThePojectsIndexWeWantToWorkWith(project);
-    allProjects[getThePojectsIndexWeWantToWorkWith(project)] = project;
-    localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
-}
-
-export function editProject(project){
-    projectFormBuilder(project)
+    if(oldProject){
+        allProjects[getThePojectsIndexWeWantToWorkWith(oldProject)] = {name:project.name, description:project.description, tasks:project.tasks, dueDate:project.dueDate};
+        localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
+    }
+    else{
+        allProjects[getThePojectsIndexWeWantToWorkWith(project)] = project;
+        localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
+    };
 }
 
 export function getTheIndexOfTheTaskWeWantToWorkWith(project, task){
@@ -110,4 +111,18 @@ export function createNewTask(project){
 //save the new task    
     const task = new Task(data.taskName, data.taskPriority, data.taskDueDate);
     retrievedProject.addTask(task);
+}
+
+export function callTheProjectFormBuilderToEditProject(project){
+    projectFormBuilder(project);
+}
+
+export function editProjectNameAndDescription(project){
+    const formData = convertFromDataToAnObject('projectForm');
+    const uneditedProject = getTheProjectWeWantToWorkWith(project.name)
+    project.editName(formData.projectName);
+    project.editDescription(formData.projectDescription);
+    updateProject(project, uneditedProject);
+    clearProjectDisplay();
+    displayOpenedProject(project);
 }
