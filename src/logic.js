@@ -1,5 +1,5 @@
 import { tr } from "date-fns/locale";
-import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay, projectFormBuilder, clearSideContainer } from "./DOMmanipulator";
+import { displayProjectOnTheSide, displayOpenedProject, clearProjectDisplay, projectFormBuilder, clearSideContainer } from "./DOMmanipulator";
 import { Project } from "./projectManager";
 import { Task } from "./taskManager";
 
@@ -70,7 +70,7 @@ export function changeIsDoneOnTask(project, task){
     updateProject(selectedProject);
 }
 
-export function  updateProject(project, oldProject=none){
+export function  updateProject(project, oldProject=null){
     const allProjects = getAllTheProjectsFromLocalstorage();
     if(oldProject){
         allProjects[getThePojectsIndexWeWantToWorkWith(oldProject)] = {name:project.name, description:project.description, tasks:project.tasks, dueDate:project.dueDate};
@@ -131,4 +131,5 @@ export function editProjectNameAndDescription(project){
     updateProject(project, uneditedProject);
     clearProjectDisplay();
     displayOpenedProject(project);
+    return;
 }
