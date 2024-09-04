@@ -64,10 +64,6 @@ export function projectFormBuilder(project=null){
     submitButton.value = "Submit";
     submitButton.innerHTML = 'Submit';
 
-    //add task button
-    const addTaskButton = document.createElement('button');
-    addTaskButton.innerHTML = 'Add Task';
-
     //projectFormBuildUp
     projectForm.appendChild(projectNameInput);
     projectForm.appendChild(projectDescriptionInput);
@@ -169,13 +165,7 @@ export function displayOpenedProject(project){
         else{
             tasksContainer.appendChild(taskContainer);
         }
-        //deleteTaskButton
-        const deleteTaskButton = document.createElement('button');
-        deleteTaskButton.className = 'button';
-        deleteTaskButton.id = 'deleteTaskButton';
-        deleteTaskButton.innerHTML = 'Delete Task';
-        deleteTaskButton.addEventListener('click', function(){project.deleteTask(task)})        
-        taskContainer.appendChild(deleteTaskButton);
+        
     }
     //add task button
     const addTaskButton = document.createElement('button');
