@@ -22,8 +22,11 @@ export class Project{
         displayOpenedProject(this);
     }
 
-    removeTask(task){
+    deleteTask(task){
         this.tasks.splice(this.tasks.indexOf(task), 1);
+        updateProject(this);
+        clearProjectDisplay();
+        displayOpenedProject(this);
     }
 
     editName(name){

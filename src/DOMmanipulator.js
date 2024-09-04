@@ -138,8 +138,7 @@ export function displayOpenedProject(project){
         //task
         const taskContainer = document.createElement('div');
         taskContainer.className = 'taskContainer';
-        
-        //taskName
+        //task name
         const taskName = document.createElement('p');
         taskName.className = 'taskName';
         taskName.innerHTML = task.name;
@@ -170,6 +169,13 @@ export function displayOpenedProject(project){
         else{
             tasksContainer.appendChild(taskContainer);
         }
+        //deleteTaskButton
+        const deleteTaskButton = document.createElement('button');
+        deleteTaskButton.className = 'button';
+        deleteTaskButton.id = 'deleteTaskButton';
+        deleteTaskButton.innerHTML = 'Delete Task';
+        deleteTaskButton.addEventListener('click', function(){project.deleteTask(task)})        
+        taskContainer.appendChild(deleteTaskButton);
     }
     //add task button
     const addTaskButton = document.createElement('button');
