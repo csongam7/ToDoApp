@@ -14,7 +14,6 @@ export class Project{
         localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
     }
 
-
     addTask(task){
         this.tasks.push(task);
         updateProject(this);
