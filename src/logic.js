@@ -1,13 +1,14 @@
 import { tr } from "date-fns/locale";
-import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay, projectFormBuilder } from "./DOMmanipulator";
+import { displayProjectOnTheSide, deleteProjectFromDOM, displayOpenedProject, clearProjectDisplay, projectFormBuilder, clearSideContainer } from "./DOMmanipulator";
 import { Project } from "./projectManager";
 import { Task } from "./taskManager";
 
 export function displayAllProjects(){
     const allProjects = getAllTheProjectsFromLocalstorage();
-    if (allProjects){
-        allProjects.forEach(project => displayProjectOnTheSide(project.name))
+    if(allProjects.length == 0){
+        clearSideContainer();
     }
+    allProjects.forEach(project => displayProjectOnTheSide(project.name));
 }
 
 export function createNewProject(){
@@ -18,12 +19,11 @@ export function createNewProject(){
 }
 
 export function deleteProject(name){
-    Object.keys(localStorage).forEach(function (key) {
-        if (key == name){
-            localStorage.removeItem(key);
-            deleteProjectFromDOM(key);
-        };
-    })
+    const allProjects = getAllTheProjectsFromLocalstorage();
+    allProjects.forEach(currentProjectOnTheLoop => {if(currentProjectOnTheLoop.name == name){
+        allProjects.splice(getThePojectsIndexWeWantToWorkWith(currentProjectOnTheLoop), 1);
+    }});
+    updateProjectList(allProjects);
 }
 
 export function openProject(projectName){
@@ -80,6 +80,12 @@ export function  updateProject(project, oldProject=none){
         allProjects[getThePojectsIndexWeWantToWorkWith(project)] = project;
         localStorage.setItem('projects', convertJSObjectToJSON(allProjects));
     };
+}
+
+export function updateProjectList(updatedList){
+    localStorage.setItem('projects', convertJSObjectToJSON(updatedList));
+    clearSideContainer();
+    displayAllProjects();
 }
 
 export function getTheIndexOfTheTaskWeWantToWorkWith(project, task){

@@ -11,7 +11,7 @@ export function buildTheSideContainer(){
     const addProjectBtn = document.createElement('button');
     addProjectBtn.innerHTML = 'Add project';
     addProjectBtn.id = 'addProject';
-    addProjectBtn.addEventListener('click', projectFormBuilder);
+    addProjectBtn.addEventListener('click', function(){projectFormBuilder();});
     addProjectBtn.className = 'addProjectButton';
     sideContainer.appendChild(addProjectBtn);
 
@@ -27,7 +27,7 @@ export function buildTheProjectContainer(){
     document.body.appendChild(projectContainer);
 }
 
-export function projectFormBuilder(project=''){
+export function projectFormBuilder(project=null){
     const projectForm = document.createElement('form');
     projectForm.id = 'projectForm';
     
@@ -51,7 +51,7 @@ export function projectFormBuilder(project=''){
     projectDescriptionInput.type = 'text';
     projectDescriptionInput.id = 'projectDescription';
     projectDescriptionInput.name = 'projectDescription';
-    if(!project.description){
+    if(!project || project.description == ''){
         projectDescriptionInput.placeholder = 'Project Description (optional)';
     }
     else{
@@ -79,6 +79,10 @@ export function projectFormBuilder(project=''){
     inputContainer.className = 'inputContainer';
     inputContainer.appendChild(projectForm);
     document.body.appendChild(inputContainer);
+}
+
+export function clearSideContainer(){
+    document.querySelector('.projectsOnTheSideContainer').innerHTML = '';
 }
 
 export function displayProjectOnTheSide(projectName){
