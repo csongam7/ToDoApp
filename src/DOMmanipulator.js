@@ -32,8 +32,7 @@ export function projectFormBuilder(project=null){
     projectForm.id = 'projectForm';
     
     if(!project){projectForm.addEventListener('submit', createNewProject)}
-    else{projectForm.addEventListener('submit', function(){editProjectNameAndDescription(project)})}
-        
+    else{projectForm.addEventListener('submit', function(){editProjectNameAndDescription(project)})}   
     //project name input
     const projectNameInput = document.createElement('input');
     projectNameInput.type = 'text';
@@ -45,7 +44,6 @@ export function projectFormBuilder(project=null){
     else{
         projectNameInput.value = project.name;
     }
-
     //project description input
     const projectDescriptionInput = document.createElement('input');
     projectDescriptionInput.type = 'text';
@@ -63,13 +61,11 @@ export function projectFormBuilder(project=null){
     submitButton.type = 'submit';
     submitButton.value = "Submit";
     submitButton.innerHTML = 'Submit';
-
     //projectFormBuildUp
     projectForm.appendChild(projectNameInput);
     projectForm.appendChild(projectDescriptionInput);
     projectForm.appendChild(addTaskButton);
     projectForm.appendChild(submitButton);
-
     //input container
     const inputContainer = document.createElement('div');
     inputContainer.className = 'inputContainer';
@@ -190,13 +186,34 @@ export function displayOpenedProject(project){
         
         projectContainer.appendChild(taskForm);
         
-        //priority input field
+        //priorities dropdown menu
+        const priorityLabel = document.createElement('label');
+        priorityLabel.innerHTML = 'Tasks priority';
+        const prioritiesContainer = document.createElement('select');
+        prioritiesContainer.name = 'priorities';
+        prioritiesContainer.id = 'priorities';
+
+        const highPriorityOption = document.createElement('option');
+        highPriorityOption.innerHTML = 'High';
+        highPriorityOption.value = 'high';
+        prioritiesContainer.appendChild(highPriorityOption);
+
+        const mediumPrioritiesOption = document.createElement('option');
+        mediumPrioritiesOption.innerHTML = 'Medium';
+        mediumPrioritiesOption.value = 'medium';
+        prioritiesContainer.appendChild(mediumPrioritiesOption);
+
+        const lowPrioritiesOption = document.createElement('option');
+        lowPrioritiesOption.innerHTML = 'Low';
+        lowPrioritiesOption.value = 'low';
+        prioritiesContainer.appendChild(lowPrioritiesOption);
+
         const taskPriorityInput = document.createElement('input');
         taskPriorityInput.type = 'text';
         taskPriorityInput.name = 'taskPriority';
         taskPriorityInput.id = 'taskPriority';
         taskPriorityInput.value = 'urgent';
-        taskForm.appendChild(taskPriorityInput);
+        taskForm.appendChild(prioritiesContainer);
 
         //due date input field
         const dueDate = document.createElement('input');
