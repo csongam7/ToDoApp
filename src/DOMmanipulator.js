@@ -160,7 +160,14 @@ export function displayOpenedProject(project){
         else{
             tasksContainer.appendChild(taskContainer);
         }
-        
+        //delete task button
+        const deleteTaskButton = document.createElement('button');
+        deleteTaskButton.className = 'button';
+        deleteTaskButton.innerHTML = 'Delete Task';
+        deleteTaskButton.addEventListener('click', function(){
+            project.deleteTask(task);
+        });
+        taskContainer.appendChild(deleteTaskButton);
     }
     //add task button
     const addTaskButton = document.createElement('button');
