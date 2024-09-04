@@ -1,5 +1,5 @@
 import { Project } from "./projectManager";
-import { createNewProject, deleteProject, openProject, editProjectNameAndDescription, callTheProjectFormBuilderToEditProject, createNewTask, changeIsDoneOnTask, updateProject } from "./logic";
+import { createNewProject, deleteProject, openProject, editProjectNameAndDescription, callTheProjectFormBuilderToEditProject, createNewTask, changeIsDoneOnTask, createEditedTask } from "./logic";
 import { format, compareAsc } from 'date-fns';
 
 export function buildTheSideContainer(){
@@ -168,6 +168,14 @@ export function displayOpenedProject(project){
             project.deleteTask(task);
         });
         taskContainer.appendChild(deleteTaskButton);
+        // edit task button
+        const editTaskButton = document.createElement('button');
+        editTaskButton.innerHTML = 'Edit task';
+        editTaskButton.className = 'button';
+        editTaskButton.addEventListener('click', function(){
+            createTaskForm(project, task)
+        })
+        taskContainer.appendChild(editTaskButton);
     }
     //add task button
     const addTaskButton = document.createElement('button');
@@ -176,7 +184,7 @@ export function displayOpenedProject(project){
     addTaskButton.innerHTML = '+';
     projectContainer.appendChild(addTaskButton);
 
-    function createTaskForm(project){
+    function createTaskForm(project, taskToEdit=null){
 
         //task form
         const taskForm = document.createElement('form');
@@ -225,9 +233,18 @@ export function displayOpenedProject(project){
         submitButton.type = 'submit';
         taskForm.appendChild(submitButton);
 
-        taskForm.addEventListener('submit', function(){createNewTask(project)}
+        if(taskToEdit){
+            taskName.value = taskToEdit.name;
+            taskPriority.value = taskToEdit.priority;
+            dueDate.value = taskToEdit.dueDate;
+            taskForm.addEventListener('submit', function(){createEditedTask(project, taskToEdit)}
+        )
+        }
+    else{
+        taskForm.addEventListener('submit', function(){project.addTask(createNewTask(project))}
         )
     }
+}
 }
 
 export function clearProjectDisplay(){

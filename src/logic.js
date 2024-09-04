@@ -12,7 +12,7 @@ export function displayAllProjects(){
 }
 
 export function createNewProject(){
-    const data = convertFromDataToAnObject('projectForm');
+    const data = convertFormDataToAnObject('projectForm');
 //save the new project    
     const project = new Project(data.projectName, data.projectDescription);
     project.saveProject();
@@ -31,7 +31,7 @@ export function openProject(projectName){
     displayOpenedProject(getTheProjectWeWantToWorkWith(projectName));
 }
 
-function convertFromDataToAnObject(formId){
+function convertFormDataToAnObject(formId){
     const form = document.getElementById(formId);
     const formData = new FormData(form);
 // Convert the form data to an object
@@ -113,10 +113,10 @@ export function convertJSObjectToJSON(jsObject){
 export function createNewTask(project){
     const retrievedProject = getTheProjectWeWantToWorkWith(project.name)
     Object.setPrototypeOf(retrievedProject, Project.prototype);
-    const data = convertFromDataToAnObject('taskForm')
+    const data = convertFormDataToAnObject('taskForm')
 //save the new task    
     const task = new Task(data.taskName, data.taskPriority, data.taskDueDate);
-    retrievedProject.addTask(task);
+    return task;
 }
 
 export function callTheProjectFormBuilderToEditProject(project){
@@ -124,12 +124,16 @@ export function callTheProjectFormBuilderToEditProject(project){
 }
 
 export function editProjectNameAndDescription(project){
-    const formData = convertFromDataToAnObject('projectForm');
-    const uneditedProject = getTheProjectWeWantToWorkWith(project.name)
+    const formData = convertFormDataToAnObject('projectForm');
+    const projectToEdit = getTheProjectWeWantToWorkWith(project.name)
     project.editName(formData.projectName);
     project.editDescription(formData.projectDescription);
-    updateProject(project, uneditedProject);
+    updateProject(project, projectToEdit);
     clearProjectDisplay();
     displayOpenedProject(project);
-    return;
+}
+
+export function createEditedTask(project, taskToEdit){
+    const editedTask = createNewTask(project);
+    project.editTask(taskToEdit, editedTask)
 }

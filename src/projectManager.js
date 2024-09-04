@@ -35,4 +35,11 @@ export class Project{
     editDescription(description){
         this.description = description;
     }
+
+    editTask(taskToEdit, newTaskData){
+        this.tasks.splice(this.tasks.indexOf(taskToEdit), 1, newTaskData);
+        updateProject(this);
+        clearProjectDisplay();
+        displayOpenedProject(this);
+    }
 }

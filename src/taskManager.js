@@ -6,7 +6,4 @@ export class Task{
         this.isDone = isDone;
     }
 
-    deleteTask(){}
-
-    editTask(){}
 }
