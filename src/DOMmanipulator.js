@@ -88,7 +88,7 @@ export function clearSideContainer(){
 export function displayProjectOnTheSide(projectName){
     const sideProject = document.createElement('div');
     const sideProjectName = document.createElement('div');
-    sideProjectName.innerHTML = projectName.replace('project', '');
+    sideProjectName.innerHTML = projectName;
     sideProjectName.addEventListener('click', function(){
         openProject(projectName);
     })
@@ -104,10 +104,6 @@ export function displayProjectOnTheSide(projectName){
     projectDeleteButton.addEventListener('click', function(){deleteProject(projectName)});
     sideProject.appendChild(projectDeleteButton);
     document.querySelector('.projectsOnTheSideContainer').appendChild(sideProject);
-}
-
-export function deleteProjectFromDOM(name){
-    document.querySelector(`#${name}`).remove();
 }
 
 export function displayOpenedProject(project){
