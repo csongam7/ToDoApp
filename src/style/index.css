@@ -9,19 +9,20 @@ body {
   height: 100vh;
 }
 
-#addProject{
-  align-self: center;
-  text-align: center;
+#addProject{  
+  justify-self: center;
+  height: 6vh;
+  width: fit-content;
 }
 
 .sideContainer{
-  font-size: 1vh;
-  width: fit-content;
+  display: grid;
+  font-size: calc(1vw + 2vh);
+  width: 100%;
   text-wrap: wrap;
   max-width: 15vw;
   background-color: rgb(133, 114, 7);
   height: 100vh;
-  grid-column: 1;
   height: 100%;
 }
  
@@ -29,6 +30,7 @@ body {
   background-color: rgb(18, 7, 224);
   width: 100%;
   height: 100%;
+  grid-template-columns: 4fr, 1fr;
   grid-column: 2;
   grid-row: 1;
   /*grid-row: 2;*/
