@@ -15,6 +15,7 @@ body {
 }
 
 .sideContainer{
+  font-size: 1vh;
   width: fit-content;
   text-wrap: wrap;
   max-width: 15vw;
