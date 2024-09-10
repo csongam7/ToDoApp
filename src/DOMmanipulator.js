@@ -87,10 +87,7 @@ export function displayProjectOnTheSide(projectName){
     sideProject.className = 'sideProject';
     sideProject.id = projectName;
     const projectDeleteButton = document.createElement('button');
-    projectDeleteButton.innerHTML = 'X';
-    //just styling for now
-    projectDeleteButton.style.width = '30px';
-    projectDeleteButton.style.height = '30px';
+    projectDeleteButton.innerHTML = "delete";
     projectDeleteButton.className = 'projectDeleteButton';
     projectDeleteButton.addEventListener('click', function(){deleteProject(projectName)});
     sideProject.appendChild(projectDeleteButton);
