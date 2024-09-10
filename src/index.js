@@ -1,5 +1,5 @@
 import './style/index.css'
-import { Project } from './projectManager';
+import { Project } from './projectManager.js';
 import { buildTheSideContainer, buildTheProjectContainer } from './DOMmanipulator';
 import { displayAllProjects } from './logic';
 
